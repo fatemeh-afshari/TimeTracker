@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:time_tracker/src/widget/pop_up.dart';
 
 class ListPage extends StatelessWidget {
   @override
@@ -6,7 +7,12 @@ class ListPage extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (_) => const AddTaskPopUp(),
+          );
+        },
       ),
       body: Center(
         child: Text('list'),
