@@ -19,18 +19,18 @@ dependencies:
   equatable: ^2.0.0
   path: ^1.8.0
   path_provider: ^2.0.2
-  sealed_annotations: ^1.2.0
   objectbox: ^1.0.0
   objectbox_flutter_libs: any
   flutter_slidable: ^0.6.0
+  sealed_annotations: ^1.2.0
 
 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  intl_utils: ^2.3.0
   build_runner: ^2.0.0
+  intl_utils: ^2.3.0
   sealed_generators: ^1.2.0
   objectbox_generator: any
 
