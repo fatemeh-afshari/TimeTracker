@@ -22,8 +22,8 @@ class LocalDataSource {
   int addTask(TaskModel task) {
     return taskModelBox.put(task);
   }
-  bool removeTask(TaskModel task){
-    return taskModelBox.remove(task.id);
+  bool removeTask(int id){
+    return taskModelBox.remove(id);
   }
   List<TaskModel> getList() {
     return taskModelBox.getAll();

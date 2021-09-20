@@ -22,6 +22,13 @@ class ListBloc extends Bloc<ListEvent, ListState>  {
       local.addTask(task);
       final list =local.getList();
       yield ListState.added(list);
+    }, getList: () async*{
+      final list =local.getList();
+      yield ListState.listUpdated(list);
+    }, deleteItem: ( id) async*{
+      local.removeTask(id);
+      final list =local.getList();
+      yield ListState.listUpdated(list);
     });
   }
 

@@ -8,4 +8,6 @@ part 'list_state.sealed.dart';
 abstract class _ListState {
   void empty();
   void added(List<TaskModel> list);
+  void listUpdated(List<TaskModel> list);
+  void deleted(List<TaskModel> list);
 }

@@ -8,4 +8,6 @@ part 'list_event.sealed.dart';
 @WithWrap()
 abstract class _ListEvent {
   void addTask(String title , String project , String description);
+  void getList();
+  void deleteItem(int id);
 }

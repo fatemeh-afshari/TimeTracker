@@ -3,5 +3,6 @@
   "title": "Title",
   "project": "Project",
   "description": "Description",
-  "validation_message": "fill all the blanks"
+  "validation_message": "fill all the blanks",
+  "empty": "empty"
 }
