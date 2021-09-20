@@ -1,5 +1,6 @@
 import 'package:objectbox/objectbox.dart';
 
+
 @Entity()
 class TaskModel {
   int id;
@@ -14,8 +15,6 @@ class TaskModel {
 
   DateTime? finishedTime;
 
-  DateTime? pausedTime;
-
   TaskModel({
     this.id = 0,
     required this.title,
@@ -24,6 +23,5 @@ class TaskModel {
     required this.createdTime,
     this.startedTime,
     this.finishedTime,
-    this.pausedTime,
   });
 }

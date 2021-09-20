@@ -39,7 +39,6 @@ class _ListPageState extends State<ListPage> {
           child: BlocBuilder<ListBloc, ListState>(
             builder: (context, state) {
               return state.whenOrDefault(
-                added: _showList,
                 listUpdated: _showList,
                 orDefault: Center(
                   child: Text(

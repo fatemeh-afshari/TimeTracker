@@ -7,7 +7,5 @@ part 'list_state.sealed.dart';
 @WithWrap()
 abstract class _ListState {
   void empty();
-  void added(List<TaskModel> list);
   void listUpdated(List<TaskModel> list);
-  void deleted(List<TaskModel> list);
 }

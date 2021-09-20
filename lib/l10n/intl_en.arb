@@ -4,5 +4,10 @@
   "project": "Project",
   "description": "Description",
   "validation_message": "fill all the blanks",
-  "empty": "empty"
+  "empty": "empty",
+  "not_started": "Not Started",
+  "started": "Started",
+  "finished": "Finished",
+  "start": "Start",
+  "finish": "Finish"
 }

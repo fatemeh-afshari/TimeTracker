@@ -18,7 +18,6 @@ class LocalDataSource {
     store = Store(getObjectBoxModel(), directory: path);
     taskModelBox = store.box<TaskModel>();
   }
-
   int addTask(TaskModel task) {
     return taskModelBox.put(task);
   }
@@ -27,6 +26,21 @@ class LocalDataSource {
   }
   List<TaskModel> getList() {
     return taskModelBox.getAll();
+  }
+  void finishItem(int id){
+    var model = taskModelBox.get(id);
+    model!.finishedTime=DateTime.now();
+    model.startedTime = null ;
+    taskModelBox.put(model);
+  }
+  void startItem(int id){
+    var model = taskModelBox.get(id);
+    model!.startedTime=DateTime.now();
+    model.finishedTime = null ;
+    taskModelBox.put(model);
+  }
+  void dispose (){
+    store.close();
   }
 }
 
