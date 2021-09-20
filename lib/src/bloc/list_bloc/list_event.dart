@@ -7,5 +7,5 @@ part 'list_event.sealed.dart';
 @WithEquality(Equality.distinct)
 @WithWrap()
 abstract class _ListEvent {
-  void addTask(TaskModel taskModel);
+  void addTask(String title , String project , String description);
 }

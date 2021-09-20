@@ -1,3 +1,7 @@
 {
-  "add": "add"
+  "add": "ADD",
+  "title": "Title",
+  "project": "Project",
+  "description": "Description",
+  "validation_message": "fill all the blanks"
 }
