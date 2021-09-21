@@ -4,6 +4,8 @@ import 'package:time_tracker/generated/l10n.dart';
 import 'package:time_tracker/src/bloc/list_bloc/list_bloc.dart';
 import 'package:time_tracker/src/bloc/list_bloc/list_event.dart';
 import 'package:time_tracker/src/model/task_model.dart';
+import 'package:time_tracker/src/route/route_names.dart';
+import 'package:time_tracker/src/config/extension.dart';
 
 class ListItem extends StatelessWidget {
   final TaskModel item;
@@ -16,7 +18,7 @@ class ListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () =>_navigate(context , item),
       child: Card(
         elevation: 5,
         shape: RoundedRectangleBorder(
@@ -38,14 +40,14 @@ class ListItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 child: IconSlideAction(
                   closeOnTap: true,
-                  caption: item.startedTime != null ? S.of(context).finish : S.of(context).start,
-                  color: item.startedTime != null ? Colors.red : Colors.green,
+                  caption: item.startedTime != null&&item.finishedTime == null ? S.of(context).finish : S.of(context).start,
+                  color: item.startedTime != null&&item.finishedTime == null ? Colors.red : Colors.green,
                   iconWidget: Icon(
                     Icons.timer,
                     color: Colors.white,
                   ),
                   onTap: () {
-                    if (item.startedTime != null) {
+                    if (item.startedTime != null&&item.finishedTime == null) {
                       ListBloc.of(context).add(ListEvent.finishItem(item.id));
                     } else {
                       ListBloc.of(context).add(ListEvent.startItem(item.id));
@@ -65,7 +67,7 @@ class ListItem extends StatelessWidget {
               ),
               title: Text(item.title),
               subtitle: Text(
-                '${item.createdTime.month}-${item.createdTime.day}-${item.createdTime.year}  ${item.createdTime.hour}:${item.createdTime.minute}',
+                item.createdTime.dateTimeToString,
               ),
             ),
           ),
@@ -81,20 +83,24 @@ class ListItem extends StatelessWidget {
   String _getText(BuildContext context, TaskModel model) {
     if (model.startedTime == null && model.finishedTime == null) {
       return S.of(context).not_started;
-    } else if (model.startedTime != null) {
-      return S.of(context).started;
-    } else {
+    } else if (model.startedTime != null && model.finishedTime != null) {
       return S.of(context).finished;
+    } else {
+      return S.of(context).started;
     }
   }
 
   Color _getColor(BuildContext context, TaskModel model) {
     if (model.startedTime == null && model.finishedTime == null) {
       return Colors.blueGrey;
-    } else if (model.startedTime != null) {
-      return Colors.green;
-    } else {
+    } else if (model.startedTime != null && model.finishedTime != null) {
       return Colors.red;
+    } else {
+      return Colors.green;
     }
+  }
+
+  _navigate(BuildContext context,TaskModel model) {
+    Navigator.of(context).pushNamed(RouteNames.detailRoute , arguments: model);
   }
 }

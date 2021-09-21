@@ -9,5 +9,9 @@
   "started": "Started",
   "finished": "Finished",
   "start": "Start",
-  "finish": "Finish"
+  "finish": "Finish",
+  "project_name": "Project Name",
+  "start_time": "Started Time",
+  "finish_time": "Finished Time",
+  "not_finished": "Not Finished"
 }

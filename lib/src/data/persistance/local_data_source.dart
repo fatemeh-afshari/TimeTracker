@@ -4,44 +4,60 @@ import 'package:time_tracker/src/model/task_model.dart';
 
 import '../../../objectbox.g.dart';
 
-class LocalDataSource {
-  late Store store;
+abstract class LocalDataSource {
+  factory LocalDataSource({
+    required PathProvider pathProvider,
+  }) = LocalDataSourceImpl;
 
+  Future<void> init();
+  int addTask(TaskModel task);
+  bool removeTask(int id);
+  List<TaskModel> getList();
+  void finishItem(int id);
+  void startItem(int id);
+  void dispose();
+}
+
+class LocalDataSourceImpl implements LocalDataSource {
   PathProvider pathProvider;
-
+  late Store store;
   late Box<TaskModel> taskModelBox;
 
-  LocalDataSource({required this.pathProvider});
+  LocalDataSourceImpl({required this.pathProvider});
 
+  @override
   Future<void> init() async {
     final path = await pathProvider.getFullDirectory(DATABASE_NAME);
     store = Store(getObjectBoxModel(), directory: path);
     taskModelBox = store.box<TaskModel>();
   }
+  @override
   int addTask(TaskModel task) {
     return taskModelBox.put(task);
   }
-  bool removeTask(int id){
+  @override
+  bool removeTask(int id) {
     return taskModelBox.remove(id);
   }
+  @override
   List<TaskModel> getList() {
     return taskModelBox.getAll();
   }
-  void finishItem(int id){
+  @override
+  void finishItem(int id) {
     var model = taskModelBox.get(id);
-    model!.finishedTime=DateTime.now();
-    model.startedTime = null ;
+    model!.finishedTime = DateTime.now();
     taskModelBox.put(model);
   }
-  void startItem(int id){
+  @override
+  void startItem(int id) {
     var model = taskModelBox.get(id);
-    model!.startedTime=DateTime.now();
-    model.finishedTime = null ;
+    model!.startedTime = DateTime.now();
+    model.finishedTime = null;
     taskModelBox.put(model);
   }
-  void dispose (){
+  @override
+  void dispose() {
     store.close();
   }
 }
-
-

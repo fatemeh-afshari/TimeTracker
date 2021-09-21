@@ -6,7 +6,7 @@ import 'package:time_tracker/src/data/persistance/local_data_source.dart';
 final getIt = GetIt.instance;
 Future<void> init() async {
   getIt.registerLazySingleton(() => PathProvider());
-  getIt.registerLazySingleton(() => LocalDataSource(pathProvider: getIt()));
+  getIt.registerLazySingleton<LocalDataSource>(() => LocalDataSource(pathProvider: getIt()));
   getIt.registerFactory(() => ListBloc(local: getIt()));
 }
 T inject<T extends Object>() {
